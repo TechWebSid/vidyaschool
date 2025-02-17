@@ -1,0 +1,38 @@
+1. General Guidelines
+Framework: Next.js 15 with App Router (app/ directory).
+Language: JavaScript (No TypeScript).
+Styling: Tailwind CSS (Avoid external stylesheets or inline styles).
+Static Export: Ensure all code works with output: "export" in next.config.js.
+Image Handling: Use <img> instead of Next.js <Image> component (since Next.js Image requires a server, which isn’t available in static export).
+Component Structure: Follow modular and reusable component principles (avoid repeating code).
+Error-Free Code: No TODOs, placeholders, or missing pieces.
+
+3.1 General Rules
+✅ Use functional components with useState and useEffect when needed.
+✅ No API Routes since output: "export" does not support server-side logic.
+✅ Use relative imports for modularity (import Navbar from "../components/Navbar";).
+✅ Ensure all navigation uses <Link> from next/link.
+
+3.2 Next.js Static Export Rules
+🚀 output: "export" in next.config.js
+
+This ensures that the site can be deployed as a static website (HTML, CSS, JS).
+No API Routes, getServerSideProps, or getStaticProps should be used.
+All dynamic data must be pre-generated or fetched from client-side (if required).
+
+🚫 DO NOT Use:
+
+getServerSideProps()
+getStaticProps()
+next/image
+API routes (app/api/...)
+
+
+ Summary of Rules
+✅ Use Next.js 15 App Router (app/ directory)
+✅ JavaScript Only (No TypeScript)
+✅ Tailwind CSS for Styling 
+✅ Static Export Friendly (output: "export")
+✅ Use <img> Instead of Next.js <Image>
+✅ No API Routes, getServerSideProps, or getStaticProps
+✅ Ensure All Navigation Uses <Link>

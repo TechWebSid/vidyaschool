@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --foreground: #000000;
   --background: #ffffff;
-  --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +16,33 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: linear-gradient(to bottom, #f9fafb, #ffffff);
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure images don't cause layout shift */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Add loading animation for images */
+@keyframes imageLoad {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+img {
+  animation: imageLoad 0.3s ease-in;
 }
