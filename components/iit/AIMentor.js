@@ -10,10 +10,15 @@ const TypingEffect = ({ text }) => {
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 30); // Adjust speed here
+      }, 10); // Changed from 30 to 10 for faster typing
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, text]);
+
+  // Add instant display for long responses
+  if (text.length > 500) {
+    return <div className="whitespace-pre-wrap">{text}</div>;
+  }
 
   return <div className="whitespace-pre-wrap">{displayText}</div>;
 };
@@ -67,9 +72,8 @@ const AIMentor = () => {
     setIsLoading(true);
 
     try {
-      // Replace with your Gemini API key
       const API_KEY = 'AIzaSyBK5XNmFOJ6JjUdKGsJvuwFQOrUtQhr318';
-      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + API_KEY, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,18 +83,29 @@ const AIMentor = () => {
             parts: [{
               text: `You are an IIT-JEE expert mentor. Please provide a detailed explanation for this IIT-JEE related question: ${userMessage}`
             }]
-          }]
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1024,
+          }
         })
       });
 
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
       const data = await response.json();
-      const aiResponse = data.candidates[0].content.parts[0].text;
+      
+      // Handle the response from free Gemini model
+      const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I apologize, but I couldn't generate a response. Please try again.";
       
       setMessages(prev => [...prev, { type: 'ai', content: aiResponse }]);
     } catch (error) {
+      console.error('Error:', error);
       setMessages(prev => [...prev, { 
         type: 'ai', 
-        content: "I apologize, but I'm having trouble connecting right now. Please try again later." 
+        content: "I apologize, but I'm having trouble connecting right now. Please try again. This is using the free Gemini API which has a limit of 60 requests per minute." 
       }]);
     } finally {
       setIsLoading(false);
