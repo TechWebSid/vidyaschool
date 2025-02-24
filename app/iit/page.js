@@ -9,6 +9,8 @@ import AIMentor from '../../components/iit/AIMentor';
 import FAQSection from '../../components/iit/FAQSection';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import QuestionGenerator from '@/components/iit/QuestionGenerator';
+
 
 
 export const metadata = {
@@ -33,6 +35,7 @@ const IITPage = () => {
       <BatchInfo />
       <StudyMaterials />
       <AIMentor />
+      <QuestionGenerator/>
       <FAQSection />
       <Footer />
     </div>

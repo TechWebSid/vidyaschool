@@ -10,6 +10,7 @@ import Admissions from '../components/Admissions'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
+
 export const metadata = {
   title: 'Vidya International School - Excellence in Education',
   description: 'Top-rated school in India offering kindergarten, CBSE curriculum, and IIT-JEE coaching. Join our community of achievers with 15+ years of academic excellence.',
@@ -35,6 +36,7 @@ const page = () => {
         <Admissions />
         <Contact />
         <Footer />
+       
       </main>
     </div>
   )
