@@ -81,7 +81,7 @@ const AIMentor = () => {
         body: JSON.stringify({
           contents: [{
             parts: [{
-              text: `You are an IIT-JEE expert mentor. Please provide a detailed explanation for this IIT-JEE related question: ${userMessage}`
+              text: `You are an IIT-JEE expert mentor. Please provide a detailed explanation for this IIT-JEE related question in easy way: ${userMessage}`
             }]
           }],
           generationConfig: {
