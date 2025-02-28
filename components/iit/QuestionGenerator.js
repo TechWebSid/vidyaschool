@@ -15,7 +15,7 @@ const QuestionGenerator = () => {
 
     try {
       const API_KEY = 'AIzaSyBK5XNmFOJ6JjUdKGsJvuwFQOrUtQhr318';
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`, {
+      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=' + API_KEY, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,16 +33,14 @@ const QuestionGenerator = () => {
                      5. Each question should be in a new line starting with its number
                      Format the output as a numbered list only.`
             }]
-          }],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1024,
-          }
+          }]
         })
       });
 
       if (!response.ok) {
-        throw new Error('API request failed');
+        const errorData = await response.json().catch(() => ({}));
+        console.error('API Error:', errorData);
+        throw new Error(errorData.error?.message || 'API request failed');
       }
 
       const data = await response.json();

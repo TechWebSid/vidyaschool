@@ -73,7 +73,7 @@ const AIMentor = () => {
 
     try {
       const API_KEY = 'AIzaSyBK5XNmFOJ6JjUdKGsJvuwFQOrUtQhr318';
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`, {
+      const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=' + API_KEY, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,31 +81,31 @@ const AIMentor = () => {
         body: JSON.stringify({
           contents: [{
             parts: [{
-              text: `You are an IIT-JEE expert mentor. Please provide a detailed explanation for this IIT-JEE related question in easy way: ${userMessage}`
+              text: `You are an IIT-JEE expert mentor. Please provide a detailed explanation for this IIT-JEE related question: ${userMessage}`
             }]
-          }],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1024,
-          }
+          }]
         })
       });
 
       if (!response.ok) {
-        throw new Error('API request failed');
+        const errorData = await response.json().catch(() => ({}));
+        console.error('API Error:', errorData);
+        throw new Error(errorData.error?.message || 'API request failed');
       }
 
       const data = await response.json();
+      const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
       
-      // Handle the response from free Gemini model
-      const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I apologize, but I couldn't generate a response. Please try again.";
-      
+      if (!aiResponse) {
+        throw new Error('No response generated');
+      }
+
       setMessages(prev => [...prev, { type: 'ai', content: aiResponse }]);
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
         type: 'ai', 
-        content: "I apologize, but I'm having trouble connecting right now. Please try again. This is using the free Gemini API which has a limit of 60 requests per minute." 
+        content: "I apologize, but I encountered an error while processing your request. Please try asking your question again." 
       }]);
     } finally {
       setIsLoading(false);
