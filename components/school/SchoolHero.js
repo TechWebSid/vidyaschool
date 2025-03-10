@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 const SchoolHero = () => {
   useEffect(() => {
@@ -46,9 +47,11 @@ const SchoolHero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 animate-on-mount opacity-0 translate-y-8 transition-all duration-700">
-              <button className="px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                Apply for Admission
-              </button>
+              <Link href="/contact">
+                <button className="px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                  Apply for Admission
+                </button>
+              </Link>
               <button className="px-8 py-4 bg-gray-100 text-gray-800 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
                 Download Brochure
               </button>

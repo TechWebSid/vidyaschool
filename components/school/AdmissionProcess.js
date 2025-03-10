@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link';
+
 const ProcessStep = ({ number, title, description, icon }) => (
   <div className="relative pl-8 pb-8 last:pb-0">
     <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-teal-500 to-cyan-500 last:hidden"></div>
@@ -112,9 +114,11 @@ const AdmissionProcess = () => {
 
         {/* CTA Button */}
         <div className="text-center">
-          <button className="px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-            Apply Now
-          </button>
+          <Link href="/contact">
+            <button className="px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              Apply Now
+            </button>
+          </Link>
         </div>
       </div>
     </section>

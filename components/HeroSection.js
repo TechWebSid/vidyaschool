@@ -1,8 +1,12 @@
 'use client'
 import { useEffect } from 'react';
+import Link from 'next/link';
 import CTAButton from './CTAButton';
+import { useRouter } from 'next/navigation';
 
 const HeroSection = () => {
+  const router = useRouter();
+
   useEffect(() => {
     const elements = document.querySelectorAll('.animate-on-mount');
     elements.forEach((el, index) => {
@@ -57,25 +61,25 @@ const HeroSection = () => {
 
             <div className="flex flex-col gap-4 animate-on-mount opacity-0 translate-y-8 transition-all duration-700">
               <CTAButton 
-                href="/preschool" 
                 color="kindergarten"
                 icon="🎨"
+                onClick={() => router.push('/preschool')}
               >
                 Discover Vidya Kids
               </CTAButton>
               
               <CTAButton 
-                href="/school" 
                 color="school"
                 icon="📚"
+                onClick={() => router.push('/school')}
               >
                 Explore CBSE Program
               </CTAButton>
               
               <CTAButton 
-                href="/iit" 
                 color="coaching"
                 icon="🎯"
+                onClick={() => router.push('/iit')}
               >
                 Join IIT-JEE Academy
               </CTAButton>
@@ -83,44 +87,57 @@ const HeroSection = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 animate-on-mount opacity-0 translate-y-8 transition-all duration-700">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">15+</div>
-                <div className="text-gray-600 text-sm">Years Legacy</div>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">5000+</div>
-                <div className="text-gray-600 text-sm">Students</div>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">100+</div>
-                <div className="text-gray-600 text-sm">Expert Faculty</div>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-teal-600">98%</div>
-                <div className="text-gray-600 text-sm">Success Rate</div>
-              </div>
+              <Link href="/about" className="block">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">15+</div>
+                  <div className="text-gray-600 text-sm">Years Legacy</div>
+                </div>
+              </Link>
+
+              <Link href="/about" className="block">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">5000+</div>
+                  <div className="text-gray-600 text-sm">Students</div>
+                </div>
+              </Link>
+
+              <Link href="/about" className="block">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">100+</div>
+                  <div className="text-gray-600 text-sm">Expert Faculty</div>
+                </div>
+              </Link>
+
+              <Link href="/about" className="block">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-teal-600">98%</div>
+                  <div className="text-gray-600 text-sm">Success Rate</div>
+                </div>
+              </Link>
             </div>
           </div>
 
           {/* Right Side - Image */}
           <div className="w-full lg:w-1/2 px-4 sm:px-6 animate-on-mount opacity-0 translate-y-8 transition-all duration-700">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1470&auto=format&fit=crop"
-                alt="Students at Vidya International School"
-                className="w-full h-[300px] sm:h-[400px] lg:h-[600px] object-cover"
-                loading="eager"
-                fetchPriority="high"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              
-              {/* Floating Achievement Badge */}
-              <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
-                <div className="text-2xl mb-1">🏆</div>
-                <div className="text-sm font-semibold text-gray-900">Top Rated</div>
-                <div className="text-xs text-gray-600">Institution</div>
+            <Link href="/about" className="block">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+                <img
+                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1470&auto=format&fit=crop"
+                  alt="Students at Vidya International School"
+                  className="w-full h-[300px] sm:h-[400px] lg:h-[600px] object-cover"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                
+                {/* Floating Achievement Badge */}
+                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
+                  <div className="text-2xl mb-1">🏆</div>
+                  <div className="text-sm font-semibold text-gray-900">Top Rated</div>
+                  <div className="text-xs text-gray-600">Institution</div>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

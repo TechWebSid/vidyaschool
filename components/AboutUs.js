@@ -35,9 +35,11 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <button className="mt-6 px-8 py-3 bg-gradient-to-r from-[#FF9A9E] to-[#FAD0C4] text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300">
-              Learn More About Us
-            </button>
+            <a href="/about">
+              <button className="mt-6 px-8 py-3 bg-gradient-to-r from-[#FF9A9E] to-[#FAD0C4] text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                Learn More About Us
+              </button>
+            </a>
           </div>
 
           {/* Right Side - Image */}

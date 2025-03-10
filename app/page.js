@@ -7,8 +7,9 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import Testimonials from '../components/Testimonials'
 import Gallery from '../components/Gallery'
 import Admissions from '../components/Admissions'
-import Contact from '../components/Contact'
+
 import Footer from '../components/Footer'
+import { ContactHero } from './contact/components/ContactHero'
 
 
 export const metadata = {
@@ -34,7 +35,7 @@ const page = () => {
         <Testimonials />
         <Gallery />
         <Admissions />
-        <Contact />
+        <ContactHero />
         <Footer />
        
       </main>

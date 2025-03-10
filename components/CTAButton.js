@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const CTAButton = ({ href, color, children, icon }) => {
+const CTAButton = ({ color, icon, children, onClick }) => {
   const colorClasses = {
     kindergarten: 'bg-gradient-to-r from-[#FF9A9E] to-[#FAD0C4] hover:from-[#FAD0C4] hover:to-[#FF9A9E]',
     school: 'bg-gradient-to-r from-[#84FAB0] to-[#8FD3F4] hover:from-[#8FD3F4] hover:to-[#84FAB0]',
@@ -8,8 +8,8 @@ const CTAButton = ({ href, color, children, icon }) => {
   };
 
   return (
-    <Link 
-      href={href}
+    <button
+      onClick={onClick}
       className={`
         ${colorClasses[color]}
         group relative
@@ -26,7 +26,7 @@ const CTAButton = ({ href, color, children, icon }) => {
         {children}
       </span>
       <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-white transition-opacity" />
-    </Link>
+    </button>
   );
 };
 

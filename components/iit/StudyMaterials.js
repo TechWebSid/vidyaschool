@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const MaterialCard = ({ title, description, features, icon, category }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -192,9 +193,11 @@ const StudyMaterials = () => {
                   <p className="text-gray-700">Study anytime, anywhere with our digital platform</p>
                 </div>
               </div>
-              <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold hover:shadow-lg transition-shadow duration-300">
-                Access Now
-              </button>
+              <Link href="/contact">
+                <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold hover:shadow-lg transition-shadow duration-300">
+                  Access Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>

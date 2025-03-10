@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link';
+
 const FeatureCard = ({ icon, title, description }) => (
   <div className="group">
     <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full transform group-hover:scale-105">
@@ -82,6 +84,13 @@ const WhyChooseSchool = () => {
             <p className="text-xl font-semibold text-gray-900">
               Recognized as one of the top CBSE schools in the region
             </p>
+          </div>
+          <div className="text-center mt-6">
+            <Link href="/contact">
+              <button className="px-6 py-3 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Enquire Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>

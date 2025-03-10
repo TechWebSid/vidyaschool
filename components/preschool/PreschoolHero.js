@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import Link from 'next/link';
 
 const PreschoolHero = () => {
   useEffect(() => {
@@ -52,14 +53,16 @@ const PreschoolHero = () => {
                 A Fun-Filled, Nurturing Environment for Your Child's First
                 Learning Steps
               </p>
-              <button
-                className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white 
-                               rounded-full text-lg font-semibold shadow-lg 
-                               hover:shadow-xl hover:scale-105 transform
-                               animate-on-mount translate-y-8 opacity-0 transition-all duration-700 delay-400 ease-out"
-              >
-                Enroll Now
-              </button>
+              <Link href="/contact">
+                <button
+                  className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white 
+                                 rounded-full text-lg font-semibold shadow-lg 
+                                 hover:shadow-xl hover:scale-105 transform
+                                 animate-on-mount translate-y-8 opacity-0 transition-all duration-700 delay-400 ease-out"
+                >
+                  Enroll Now
+                </button>
+              </Link>
             </div>
 
             {/* Image */}

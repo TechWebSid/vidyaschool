@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import Link from 'next/link';
 
 const BatchCard = ({ title, timing, days, strength, status }) => (
   <div className="group">
@@ -138,9 +139,11 @@ const BatchInfo = () => {
 
           {/* CTA Button */}
           <div className="text-center mt-12">
-            <button className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:from-violet-500 hover:to-purple-500">
-              Start Admission Process
-            </button>
+            <Link href="/contact">
+              <button className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:from-violet-500 hover:to-purple-500">
+                Start Admission Process
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -3,21 +3,21 @@ import React from 'react';
 const testimonials = [
   {
     name: "Rahul Sharma",
-    image: "/student-1.jpg",
+    image: "https://ui-avatars.com/api/?name=RS&background=random&size=200",
     rating: 5,
     text: "The AI-powered learning system helped me understand complex concepts easily. Cleared IIT-JEE with AIR under 1000!",
     institute: "IIT Delhi"
   },
   {
     name: "Priya Patel",
-    image: "/student-2.jpg",
+    image: "https://ui-avatars.com/api/?name=PP&background=random&size=200",
     rating: 5,
     text: "The personalized study plan and doubt solving feature were game-changers in my preparation.",
     institute: "IIT Bombay"
   },
   {
     name: "Amit Kumar",
-    image: "/student-3.jpg",
+    image: "https://ui-avatars.com/api/?name=AK&background=random&size=200",
     rating: 5,
     text: "Expert mentors and AI-generated practice papers helped me improve my weak areas significantly.",
     institute: "IIT Madras"
@@ -42,7 +42,13 @@ export function Testimonials() {
               className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full bg-gray-200 mb-4"></div> {/* Placeholder */}
+                <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
+                  <img 
+                    src={testimonial.image}
+                    alt={`${testimonial.name}'s avatar`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="flex gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <span key={i} className="text-yellow-400">★</span>

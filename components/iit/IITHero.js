@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 const IITHero = () => {
   useEffect(() => {
@@ -65,19 +66,23 @@ const IITHero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 animate-on-mount opacity-0 translate-y-8 transition-all duration-700">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-semibold overflow-hidden">
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-violet-600 transition-transform duration-300 group-hover:translate-x-full"></div>
-                <span className="relative flex items-center justify-center gap-2">
-                  <span>Join Now</span>
-                  <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                </span>
-              </button>
-              <button className="group px-8 py-4 bg-white text-gray-800 rounded-xl font-semibold border-2 border-transparent hover:border-violet-200 transition-all duration-300">
-                <span className="flex items-center justify-center gap-2">
-                  <span>Get Free Counselling</span>
-                  <span className="transform group-hover:rotate-45 transition-transform">↗</span>
-                </span>
-              </button>
+              <Link href="/contact">
+                <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-semibold overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-violet-600 transition-transform duration-300 group-hover:translate-x-full"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    <span>Join Now</span>
+                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                  </span>
+                </button>
+              </Link>
+              <Link href="/contact">
+                <button className="group px-8 py-4 bg-white text-gray-800 rounded-xl font-semibold border-2 border-transparent hover:border-violet-200 transition-all duration-300">
+                  <span className="flex items-center justify-center gap-2">
+                    <span>Get Free Counselling</span>
+                    <span className="transform group-hover:rotate-45 transition-transform">↗</span>
+                  </span>
+                </button>
+              </Link>
             </div>
 
             {/* Stats Cards */}

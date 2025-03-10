@@ -1,4 +1,4 @@
-const InstitutionCard = ({ title, description, icon, color, buttonText }) => (
+const InstitutionCard = ({ title, description, icon, color, buttonText, link }) => (
   <div className={`p-8 rounded-2xl transition-all duration-300 hover:shadow-xl ${color}`}>
     <div className="space-y-4">
       <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-3xl">
@@ -6,9 +6,11 @@ const InstitutionCard = ({ title, description, icon, color, buttonText }) => (
       </div>
       <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
       <p className="text-gray-600">{description}</p>
-      <button className="mt-4 px-6 py-2 bg-white rounded-full text-black font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
-        {buttonText}
-      </button>
+      <a href={link}>
+        <button className="mt-4 px-6 py-2 bg-white rounded-full text-black font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
+          {buttonText}
+        </button>
+      </a>
     </div>
   </div>
 );
@@ -21,7 +23,7 @@ const Institutions = () => {
       icon: "🎨",
       color: "bg-gradient-to-br from-[#FF9A9E] to-[#FAD0C4]",
       buttonText: "Explore Kindergarten",
-      link: "/kindergarten",
+      link: "/preschool",
     },
     {
       title: "CBSE School – Strong Foundation for Academic Success",
@@ -37,7 +39,7 @@ const Institutions = () => {
       icon: "🎯",
       color: "bg-gradient-to-br from-[#FFA07A] to-[#FFD700]",
       buttonText: "Start Preparing",
-      link: "/coaching",
+      link: "/iit",
     },
   ];
 

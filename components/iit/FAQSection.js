@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import Link from 'next/link';
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
   <div className="bg-white/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -112,9 +113,11 @@ const FAQSection = () => {
           <p className="text-gray-700 mb-4">
             Still have questions? We're here to help!
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-            Contact Our Counselors
-          </button>
+          <Link href="/contact">
+            <button className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              Contact Our Counselors
+            </button>
+          </Link>
         </div>
       </div>
     </section>

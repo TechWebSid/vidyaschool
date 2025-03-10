@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const features = [
   {
@@ -63,6 +64,14 @@ export function WhyChooseUs() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link href="/contact">
+            <button className="px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              Start Your Journey
+            </button>
+          </Link>
         </div>
       </div>
     </section>

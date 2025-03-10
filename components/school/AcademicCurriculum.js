@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import Link from 'next/link';
 
 const CurriculumTab = ({ title, isActive, onClick }) => (
   <button
@@ -230,6 +231,14 @@ const AcademicCurriculum = () => {
           </div>
 
           <SubjectList subjects={curriculumData[activeTab].subjects} />
+        </div>
+
+        <div className="text-center mt-12">
+          <Link href="/contact">
+            <button className="px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              Enquire About Admission
+            </button>
+          </Link>
         </div>
       </div>
     </section>
