@@ -41,8 +41,12 @@ const Navbar = () => {
                 href="/" 
                 className="flex items-center gap-3 group"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-pink-400 to-pink-300 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg group-hover:shadow-xl transition-all">
-                  V
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
+                  <img 
+                    src="/images/logo.jpg" 
+                    alt="Easy2BuyHub Logo" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <h1 className="text-base sm:text-lg font-bold text-gray-900">
@@ -96,8 +100,12 @@ const Navbar = () => {
             className="flex items-center gap-3"
             onClick={() => setIsOpen(false)}
           >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-400 to-pink-300 flex items-center justify-center text-white font-bold text-xl">
-              V
+            <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+              <img 
+                src="/images/logo.jpg" 
+                alt="Easy2BuyHub Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h1 className="text-base font-bold text-gray-900">
