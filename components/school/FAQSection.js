@@ -46,10 +46,6 @@ const FAQSection = () => {
       answer: "The admission process involves four simple steps: 1) Fill out the online application form, 2) Attend a counseling session, 3) Submit required documents, and 4) Receive admission confirmation. Our admissions team will guide you through each step."
     },
     {
-      question: "What subjects are offered in Class 11-12?",
-      answer: "We offer three streams: Science (PCM/PCB), Commerce, and Humanities. The Science stream includes Physics, Chemistry, Mathematics/Biology, and optional Computer Science. Commerce includes Accountancy, Business Studies, Economics, and Mathematics. Humanities offers History, Political Science, Geography, and Psychology."
-    },
-    {
       question: "What is the student-teacher ratio?",
       answer: "We maintain a student-teacher ratio of 20:1 to ensure personalized attention and effective learning. Each class has a maximum of 30 students to create an optimal learning environment."
     },

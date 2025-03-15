@@ -147,42 +147,6 @@ const AcademicCurriculum = () => {
           description: "Career guidance and life skills"
         }
       ]
-    },
-    senior: {
-      title: "Senior Secondary (11th-12th)",
-      description: "Specialized streams preparing students for higher education.",
-      subjects: [
-        {
-          icon: "🔬",
-          name: "Science Stream",
-          description: "Physics, Chemistry, Mathematics/Biology"
-        },
-        {
-          icon: "💹",
-          name: "Commerce Stream",
-          description: "Accountancy, Business Studies, Economics"
-        },
-        {
-          icon: "📚",
-          name: "Humanities Stream",
-          description: "History, Political Science, Psychology"
-        },
-        {
-          icon: "📝",
-          name: "English Core",
-          description: "Mandatory for all streams"
-        },
-        {
-          icon: "💻",
-          name: "Computer Science",
-          description: "Optional for Science and Commerce"
-        },
-        {
-          icon: "🎯",
-          name: "Career Counseling",
-          description: "University and career guidance"
-        }
-      ]
     }
   };
 

@@ -24,9 +24,6 @@ export function Gallery() {
   const timeoutRef = useRef(null);
   const scrollRef = useRef(null);
 
-  // Create an extended array that includes copies of the first few items
-  const extendedItems = [...galleryItems, ...galleryItems.slice(0, 5)];
-
   function resetTimeout() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -36,103 +33,95 @@ export function Gallery() {
   useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(() => {
-      if (currentIndex >= galleryItems.length - 1) {
-        // When reaching the end, quickly reset to start without animation
-        setCurrentIndex(0);
-        if (scrollRef.current) {
-          scrollRef.current.style.transition = 'none';
-          scrollRef.current.style.transform = `translateX(0)`;
-          // Force reflow
-          scrollRef.current.offsetHeight;
-          scrollRef.current.style.transition = 'transform 0.5s ease-in-out';
-        }
-      } else {
-        setCurrentIndex(prevIndex => prevIndex + 1);
-      }
+      setCurrentIndex((prevIndex) => 
+        prevIndex >= Math.max(0, galleryItems.length - 5) ? 0 : prevIndex + 1
+      );
     }, 3000);
 
     return () => resetTimeout();
   }, [currentIndex]);
 
   const handlePrev = () => {
-    setCurrentIndex(prevIndex => {
-      if (prevIndex === 0) {
-        return galleryItems.length - 1;
-      }
-      return prevIndex - 1;
-    });
+    setCurrentIndex(prevIndex => 
+      prevIndex === 0 ? Math.max(0, galleryItems.length - 5) : prevIndex - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex(prevIndex => {
-      if (prevIndex >= galleryItems.length - 1) {
-        return 0;
-      }
-      return prevIndex + 1;
-    });
+    setCurrentIndex(prevIndex => 
+      prevIndex >= Math.max(0, galleryItems.length - 5) ? 0 : prevIndex + 1
+    );
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Gallery</h2>
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Gallery</h2>
         </div>
 
         <div className="relative overflow-hidden">
-          {/* Previous Button */}
-          <button 
-            onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white transition-all"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          {/* Main Gallery Slider */}
+          <div className="relative w-full">
+            {/* Previous Button */}
+            <button 
+              onClick={handlePrev}
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-1.5 md:p-2 rounded-full shadow-lg hover:bg-white transition-all"
+              aria-label="Previous slide"
+            >
+              <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
 
-          {/* Gallery Container */}
-          <div 
-            ref={scrollRef}
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / 5)}%)`
-            }}
-          >
-            {extendedItems.map((item, index) => (
-              <div 
-                key={`${item.id}-${index}`}
-                className="flex-none w-1/5 px-2"
-              >
-                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={`Gallery image ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
+            {/* Gallery Container */}
+            <div 
+              ref={scrollRef}
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${currentIndex * (100 / (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5))}%)`
+              }}
+            >
+              {galleryItems.map((item, index) => (
+                <div 
+                  key={item.id}
+                  className="w-full flex-none md:w-1/3 lg:w-1/5 px-1 md:px-2"
+                >
+                  <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={`Gallery image ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button 
+              onClick={handleNext}
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-1.5 md:p-2 rounded-full shadow-lg hover:bg-white transition-all"
+              aria-label="Next slide"
+            >
+              <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
 
-          {/* Next Button */}
-          <button 
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white transition-all"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
           {/* Dots Navigation */}
-          <div className="flex justify-center gap-2 mt-4">
-            {galleryItems.map((_, index) => (
+          <div className="flex justify-center gap-1 md:gap-2 mt-4 flex-wrap">
+            {Array.from({ length: Math.ceil(galleryItems.length / (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5)) }).map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  currentIndex === index ? 'bg-gray-800 w-4' : 'bg-gray-300'
+                onClick={() => setCurrentIndex(index * (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5))}
+                className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all ${
+                  Math.floor(currentIndex / (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5)) === index 
+                    ? 'bg-gray-800 w-3 md:w-4' 
+                    : 'bg-gray-300'
                 }`}
+                aria-label={`Go to slide group ${index + 1}`}
               />
             ))}
           </div>

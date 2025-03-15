@@ -25,12 +25,6 @@ const AchievementsResults = () => {
       icon: "🎓"
     },
     {
-      title: "12th Board Results",
-      stats: "99%",
-      description: "Science Stream Topper in CBSE Class XII Board Examinations 2024",
-      icon: "🏆"
-    },
-    {
       title: "Olympiad Achievements",
       stats: "50+",
       description: "National & International Olympiad medals in 2023-24",
