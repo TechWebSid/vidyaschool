@@ -21,8 +21,29 @@ const galleryItems = [
 
 export function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(5);
   const timeoutRef = useRef(null);
   const scrollRef = useRef(null);
+
+  // Function to get number of visible items based on screen width
+  const updateVisibleItems = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) {
+        setVisibleItems(1);
+      } else if (window.innerWidth < 1024) {
+        setVisibleItems(3);
+      } else {
+        setVisibleItems(5);
+      }
+    }
+  };
+
+  // Initialize visible items and add resize listener
+  useEffect(() => {
+    updateVisibleItems();
+    window.addEventListener('resize', updateVisibleItems);
+    return () => window.removeEventListener('resize', updateVisibleItems);
+  }, []);
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -79,7 +100,7 @@ export function Gallery() {
               ref={scrollRef}
               className="flex transition-transform duration-500 ease-in-out"
               style={{
-                transform: `translateX(-${currentIndex * (100 / (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5))}%)`
+                transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`
               }}
             >
               {galleryItems.map((item, index) => (
@@ -112,12 +133,12 @@ export function Gallery() {
 
           {/* Dots Navigation */}
           <div className="flex justify-center gap-1 md:gap-2 mt-4 flex-wrap">
-            {Array.from({ length: Math.ceil(galleryItems.length / (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5)) }).map((_, index) => (
+            {Array.from({ length: Math.ceil(galleryItems.length / visibleItems) }).map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index * (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5))}
+                onClick={() => setCurrentIndex(index * visibleItems)}
                 className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all ${
-                  Math.floor(currentIndex / (window?.innerWidth < 768 ? 1 : window?.innerWidth < 1024 ? 3 : 5)) === index 
+                  Math.floor(currentIndex / visibleItems) === index 
                     ? 'bg-gray-800 w-3 md:w-4' 
                     : 'bg-gray-300'
                 }`}
