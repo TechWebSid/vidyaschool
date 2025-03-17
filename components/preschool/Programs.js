@@ -1,85 +1,154 @@
 'use client'
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-const ProgramCard = ({ icon, title, ageGroup, description, delay }) => (
+const ProgramCard = ({ icon, title, ageGroup, description, delay, color }) => (
   <div 
-    className="relative group animate-on-mount translate-y-8 opacity-0"
+    className={`program-card relative group opacity-0 translate-y-8
+                transition-all duration-700 ease-out`}
     style={{ transitionDelay: `${delay}ms` }}
   >
-    <div className="h-full bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl 
-                    transform hover:translate-y-[-4px] transition-all duration-300">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl -z-10"></div>
-      
-      {/* Content */}
-      <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-        {icon}
+    {/* Floating Background Elements */}
+    <div className={`absolute -inset-4 ${color} rounded-[3rem] opacity-20 
+                    group-hover:opacity-40 group-hover:blur-xl transition-all duration-500`}></div>
+    
+    {/* Main Card */}
+    <div className="relative h-full bg-white/90 backdrop-blur-sm rounded-[2rem] p-8 
+                    transform hover:translate-y-[-8px] hover:rotate-2 transition-all duration-500
+                    border-4 border-dashed border-pink-200 shadow-xl overflow-hidden">
+      {/* Decorative Corner Elements */}
+      <div className="absolute -top-8 -right-8 w-16 h-16 bg-yellow-200 rounded-full 
+                    opacity-30 group-hover:scale-150 transition-transform duration-500"></div>
+      <div className="absolute -bottom-8 -left-8 w-16 h-16 bg-pink-200 rounded-full 
+                    opacity-30 group-hover:scale-150 transition-transform duration-500"></div>
+
+      {/* Icon Container */}
+      <div className="relative mb-6">
+        <div className="w-20 h-20 mx-auto bg-white rounded-2xl rotate-45 
+                       border-4 border-yellow-200 shadow-lg
+                       group-hover:rotate-[225deg] transition-transform duration-500">
+          <div className="absolute inset-0 flex items-center justify-center -rotate-45
+                          group-hover:rotate-[-225deg] transition-transform duration-500">
+            <span className="text-5xl">{icon}</span>
+          </div>
+        </div>
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>
-      <p className="text-purple-600 font-medium mb-4">{ageGroup}</p>
-      <p className="text-gray-700 mb-6">{description}</p>
-      <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white 
-                        rounded-full font-medium hover:shadow-lg transform hover:scale-105 
-                        transition-all duration-300">
-        Learn More
-      </button>
+
+      {/* Content */}
+      <div className="text-center">
+        <h3 className="text-2xl font-['Comic_Sans_MS'] font-bold mb-2
+                       bg-gradient-to-r from-pink-500 to-purple-500 
+                       text-transparent bg-clip-text">{title}</h3>
+        <div className="inline-block px-4 py-1 rounded-full bg-gradient-to-r 
+                       from-pink-200 to-purple-200 text-purple-700 
+                       font-semibold mb-4">{ageGroup}</div>
+        <p className="text-gray-700">{description}</p>
+      </div>
+
+      {/* Interactive Button */}
+      <div className="mt-6 text-center">
+        <button className="relative px-6 py-2 rounded-full overflow-hidden
+                          group-hover:shadow-lg transition-shadow duration-300">
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 
+                          group-hover:animate-shine"></div>
+          <span className="relative text-white font-medium">Explore Program ✨</span>
+        </button>
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute top-1/2 -right-2 w-4 h-4 
+                      bg-yellow-200 rounded-full opacity-50 animate-float-slow"></div>
+      <div className="absolute bottom-1/4 -left-2 w-3 h-3 
+                      bg-pink-200 rounded-full opacity-50 animate-float-slow"></div>
     </div>
   </div>
 );
 
 const Programs = () => {
+  const sectionRef = useRef(null);
+
   useEffect(() => {
-    const elements = document.querySelectorAll('.animate-on-mount');
-    elements.forEach(el => {
-      el.classList.add('translate-y-0', 'opacity-100');
-    });
+    const cards = document.querySelectorAll('.program-card');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cards.forEach(card => observer.observe(card));
+    return () => observer.disconnect();
   }, []);
 
   const programs = [
     {
       icon: "🍼",
-      title: "Toddler Program",
+      title: "Tiny Explorers",
       ageGroup: "1.5 – 2.5 Years",
-      description: "Early development through sensory play, social interaction, and basic motor skills activities."
+      description: "A magical journey of discovery through sensory play and first friendships!",
+      color: "bg-pink-400"
     },
     {
       icon: "🎨",
-      title: "Nursery",
+      title: "Creative Cubs",
       ageGroup: "2.5 – 3.5 Years",
-      description: "Creative exploration through art, music, and foundational learning experiences."
+      description: "Where imagination soars through art, music, and wonderful adventures!",
+      color: "bg-purple-400"
     },
     {
       icon: "📖",
-      title: "Kindergarten",
+      title: "Wonder Kids",
       ageGroup: "3.5 – 5 Years",
-      description: "Comprehensive preparation with phonics, numbers, and interactive storytelling sessions."
+      description: "Preparing for big school with fun learning and exciting discoveries!",
+      color: "bg-yellow-400"
     }
   ];
 
   return (
-    <section className="py-16 sm:py-20 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-yellow-200 rounded-full blur-3xl opacity-50 animate-float"></div>
-        <div className="absolute bottom-1/3 -left-12 w-48 h-48 bg-pink-200 rounded-full blur-3xl opacity-50 animate-float-delayed"></div>
+    <section ref={sectionRef} 
+             className="py-20 relative overflow-hidden bg-gradient-to-b from-blue-50 via-pink-50 to-purple-50">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        {/* Rainbow Arc */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[200%] h-[300px]
+                        bg-gradient-to-r from-red-200 via-yellow-200 to-purple-200
+                        opacity-20 rounded-b-[100%]"></div>
+
+        {/* Static Clouds */}
+        {[...Array(6)].map((_, i) => (
+          <div key={i}
+               className="absolute w-24 h-24"
+               style={{
+                 top: `${20 + (i * 15)}%`,
+                 left: `${10 + (i * 15)}%`,
+               }}>
+            <div className="w-full h-full bg-white rounded-full blur-xl opacity-60 animate-float-slow"
+                 style={{ animationDelay: `${i * 2}s` }}></div>
+          </div>
+        ))}
       </div>
 
       <div className="container mx-auto px-4 relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6
-                         animate-on-mount translate-y-8 opacity-0 transition-all duration-700">
-            Programs & {' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
-              Age Groups
-            </span>
-          </h2>
-          <p className="text-lg text-gray-700
-                       animate-on-mount translate-y-8 opacity-0 transition-all duration-700 delay-200">
-            Tailored learning experiences for every stage of early childhood development
+          <div className="relative inline-block mb-8">
+            <h2 className="text-5xl font-['Comic_Sans_MS'] font-bold
+                          bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-500
+                          text-transparent bg-clip-text">
+              Our Magical Programs
+            </h2>
+            {/* Decorative Stars */}
+            <div className="absolute -top-8 -left-12 text-4xl animate-spin-slow">✨</div>
+            <div className="absolute -bottom-4 -right-8 text-3xl animate-spin-slow">✨</div>
+          </div>
+          <p className="text-2xl text-gray-700">
+            Choose the perfect adventure for your little star! 🌟
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
           {programs.map((program, index) => (
             <ProgramCard
               key={index}
@@ -90,21 +159,10 @@ const Programs = () => {
         </div>
       </div>
 
-      {/* Hand-drawn style divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg className="relative block w-full h-12" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path 
-            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
-            fill="#fff5f7"
-            className="opacity-25"
-          ></path>
-          <path 
-            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" 
-            fill="#fff5f7"
-            className="opacity-50"
-          ></path>
-        </svg>
-      </div>
+      {/* Playful Bottom Border */}
+      <div className="absolute bottom-0 left-0 w-full h-24 
+                      bg-gradient-to-r from-pink-200 via-purple-200 to-yellow-200 
+                      opacity-20"></div>
     </section>
   );
 };

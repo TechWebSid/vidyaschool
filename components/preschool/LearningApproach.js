@@ -1,84 +1,136 @@
 'use client'
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const ActivityCard = ({ icon, title, description, delay }) => (
   <div 
-    className={`relative group animate-on-mount translate-y-8 opacity-0`}
+    className={`activity-card relative group opacity-0 translate-y-8
+                transition-all duration-700 ease-out`}
     style={{ transitionDelay: `${delay}ms` }}
   >
-    <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-400 rounded-3xl opacity-0 
-                    group-hover:opacity-100 transform group-hover:scale-[1.02] transition-all duration-300 -z-10"></div>
-    <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg group-hover:shadow-xl 
-                    transform group-hover:translate-y-[-3px] transition-all duration-300">
-      <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{icon}</div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-pink-600 transition-colors duration-300">
-        {title}
-      </h3>
-      <p className="text-gray-700">{description}</p>
+    {/* Background Gradient */}
+    <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-pink-200 to-purple-200 
+                    rounded-[2rem] opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                    
+    {/* Main Card Content */}
+    <div className="relative bg-white/95 backdrop-blur-sm rounded-[2rem] p-8 
+                    transform hover:translate-y-[-12px] hover:rotate-2 transition-all duration-500
+                    border-4 border-pink-100/50 shadow-xl">
+      {/* Icon Circle */}
+      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2
+                      bg-white rounded-full w-16 h-16 flex items-center justify-center
+                      shadow-lg border-4 border-yellow-200 animate-bounce-slow">
+        <span className="text-4xl">{icon}</span>
+      </div>
+      
+      {/* Content */}
+      <div className="mt-8">
+        <h3 className="text-2xl font-['Comic_Sans_MS'] font-bold text-center mb-4
+                       bg-gradient-to-r from-yellow-500 via-pink-500 to-purple-500 
+                       text-transparent bg-clip-text">{title}</h3>
+        <p className="text-gray-700 text-center leading-relaxed">{description}</p>
+      </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute -right-3 top-1/2 w-6 h-6 
+                      bg-yellow-200 rounded-full opacity-50 animate-float-slow"></div>
+      <div className="absolute -left-3 bottom-1/4 w-4 h-4 
+                      bg-pink-200 rounded-full opacity-50 animate-float-slow" 
+           style={{ animationDelay: '1s' }}></div>
     </div>
   </div>
 );
 
 const LearningApproach = () => {
+  const sectionRef = useRef(null);
+
   useEffect(() => {
-    const elements = document.querySelectorAll('.animate-on-mount');
-    elements.forEach(el => {
-      el.classList.add('translate-y-0', 'opacity-100');
-    });
+    // Simple fade-in animation for cards
+    const cards = document.querySelectorAll('.activity-card');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
   }, []);
 
   const activities = [
     {
       icon: "🎭",
       title: "Storytelling & Drama",
-      description: "Interactive storytelling sessions and role-play activities that develop language and social skills."
+      description: "Join our magical storytelling adventures where imagination comes alive!"
     },
     {
       icon: "🎶",
-      title: "Rhymes & Music Time",
-      description: "Fun musical activities that enhance memory, rhythm, and coordination through songs and movement."
+      title: "Music & Movement",
+      description: "Dance, sing, and wiggle in our enchanted musical playground!"
     },
     {
       icon: "🏃",
-      title: "Outdoor Play & Growth",
-      description: "Safe outdoor activities that promote physical development and gross motor skills."
+      title: "Playful Learning",
+      description: "Run, jump, and grow in our safe and exciting outdoor wonderland!"
     },
     {
       icon: "🔢",
-      title: "Basic Math & Language",
-      description: "Playful introduction to numbers, shapes, letters, and basic communication skills."
+      title: "Number & Letter Fun",
+      description: "Make friends with numbers and letters through magical games!"
     }
   ];
 
   return (
-    <section className="py-16 sm:py-20 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating shapes */}
-        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-yellow-200 rounded-full blur-3xl opacity-50 animate-float"></div>
-        <div className="absolute bottom-1/3 -left-12 w-48 h-48 bg-pink-200 rounded-full blur-3xl opacity-50 animate-float-delayed"></div>
-        
-        {/* Stars */}
-        <div className="absolute top-1/3 left-1/4 text-yellow-400 text-2xl animate-twinkle">✦</div>
-        <div className="absolute bottom-1/4 right-1/3 text-purple-400 text-xl animate-twinkle-delayed">✦</div>
+    <section ref={sectionRef} 
+             className="py-20 relative overflow-hidden bg-gradient-to-b from-purple-50 to-blue-50">
+      {/* Static Decorative Background */}
+      <div className="absolute inset-0">
+        {/* Static Floating Elements */}
+        {[...Array(5)].map((_, i) => (
+          <div key={i} 
+               className="absolute w-40 h-40"
+               style={{
+                 top: `${20 + (i * 15)}%`,
+                 left: `${10 + (i * 20)}%`,
+               }}>
+            <div className={`w-full h-full rounded-full blur-3xl opacity-20 
+                           animate-float-slow bg-gradient-to-r from-pink-200 to-purple-200`}
+                 style={{ animationDelay: `${i * 2}s` }}></div>
+          </div>
+        ))}
+
+        {/* Static Stars */}
+        {[...Array(8)].map((_, i) => (
+          <div key={i}
+               className="absolute text-2xl animate-pulse"
+               style={{
+                 top: `${10 + (i * 10)}%`,
+                 left: `${5 + (i * 12)}%`,
+                 animationDelay: `${i * 0.5}s`
+               }}>
+            ✨
+          </div>
+        ))}
       </div>
 
       <div className="container mx-auto px-4 relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6
-                         animate-on-mount transform translate-y-8 opacity-0 transition-all duration-700">
-            Learning Through{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
-              Play
-            </span>
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-5xl font-['Comic_Sans_MS'] font-bold mb-6
+                         bg-gradient-to-r from-yellow-500 via-pink-500 to-purple-500 
+                         text-transparent bg-clip-text animate-bounce-slow">
+            Learning Through Play
           </h2>
-          <p className="text-lg text-gray-700
-                       animate-on-mount transform translate-y-8 opacity-0 transition-all duration-700 delay-200">
-            Our play-based approach makes learning fun and memorable for your little ones
+          <p className="text-2xl text-gray-700 leading-relaxed">
+            Where every day is a new magical adventure! 🌈
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           {activities.map((activity, index) => (
             <ActivityCard
               key={index}
@@ -89,11 +141,11 @@ const LearningApproach = () => {
         </div>
       </div>
 
-      {/* Wavy Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg className="relative block w-full h-12" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      {/* Decorative Bottom Wave */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+        <svg className="w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" 
-                fill="currentColor" className="text-pink-50"></path>
+                fill="currentColor" className="text-white/50"></path>
         </svg>
       </div>
     </section>
