@@ -8,6 +8,7 @@ import Testimonials from '../../components/preschool/Testimonials';
 import AdmissionProcess from '../../components/preschool/AdmissionProcess';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import ParentTeaching from '@/components/preschool/ParentTeaching';
 
 export const metadata = {
   title: 'Preschool & Kindergarten | Vidya International School',
@@ -26,6 +27,7 @@ const PreschoolPage = () => {
       <Navbar />
       <PreschoolHero />
       <WhyChoosePreschool />
+      <ParentTeaching/>
       <LearningApproach />
       <Programs />
       <Facilities />
