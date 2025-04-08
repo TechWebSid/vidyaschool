@@ -125,7 +125,7 @@ const ParentTeaching = () => {
       <div className="absolute inset-0">
         {/* Rainbow Arc */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[200%] h-[300px]
-                        bg-gradient-to-r from-red-200 via-yellow-200 via-green-200 via-blue-200 to-purple-200
+                        bg-gradient-to-r from-red-200 via-yellow-200  to-purple-200
                         opacity-20 rounded-b-[100%]"></div>
 
         {/* Floating Elements */}

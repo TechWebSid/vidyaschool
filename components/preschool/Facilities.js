@@ -107,11 +107,11 @@ const Facilities = () => {
       alt: "Rainbow Classroom"
     },
     {
-      src: "https://images.unsplash.com/photo-1576877138403-8ec2f82cb1f3",
+      src: "https://static.toiimg.com/thumb/msid-103307436,width-1280,height-720,imgsize-122560,resizemode-6,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
       alt: "Adventure Playground"
     },
     {
-      src: "https://images.unsplash.com/photo-1544032527-042957c6f7ce",
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKnoV5tc5JSx7LCj_KduQ6sBxu0kL8AT1N2A&s",
       alt: "Story Time Corner"
     },
     {

@@ -21,6 +21,8 @@ const Navbar = () => {
     { name: 'IIT-JEE', href: '/iit' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
+    {name: 'labs' , href: '/labs'},
+    {name: 'Mentorship', href: '/mentorship'}
   ];
 
   return (
@@ -103,7 +105,7 @@ const Navbar = () => {
             <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
               <img 
                 src="/images/logo.jpg" 
-                alt="Easy2BuyHub Logo" 
+                alt="vidya Logo" 
                 className="w-full h-full object-cover"
               />
             </div>

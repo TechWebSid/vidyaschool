@@ -1,17 +1,27 @@
 import React from 'react';
-import IITHero from '../../components/iit/IITHero';
+// import IITHero from '../../components/iit/IITHero';
 import WhyChooseIIT from '../../components/iit/WhyChooseIIT';
 import CourseStructure from '../../components/iit/CourseStructure';
 import ResultsSection from '../../components/iit/ResultsSection';
 import BatchInfo from '../../components/iit/BatchInfo';
 import StudyMaterials from '../../components/iit/StudyMaterials';
 import AIMentor from '../../components/iit/AIMentor';
-import FAQSection from '../../components/iit/FAQSection';
+// import FAQSection from '../../components/iit/FAQSection';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import QuestionGenerator from '@/components/iit/QuestionGenerator';
 
+import MHTCETOverview from '@/components/iit/MHTCETOverview';
+import MHTCETEligibility from '@/components/iit/MHTCETEligibility';
+import MHTCETSyllabus from '@/components/iit/MHTCETSyllabus';
+import MHTCETPreparation from '@/components/iit/MHTCETPreparation';
 
+import NEETOverview from '@/components/iit/NEETOverview';
+import NEETPattern from '@/components/iit/NEETPattern';
+import NEETSyllabus from '@/components/iit/NEETSyllabus';
+import NEETStudyPlan from '@/components/iit/NEETStudyPlan';
+import ExamHero from '@/components/iit/ExamHero';
+import CombinedFAQSection from '@/components/iit/CombinedFAQSection';
 
 export const metadata = {
   title: 'IIT-JEE Coaching | Vidya International School',
@@ -28,7 +38,8 @@ const IITPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8f1ff] to-[#fff1f9]">
         <Navbar />
-      <IITHero />
+      {/* <IITHero /> */}
+      <ExamHero/>
       <WhyChooseIIT />
       <CourseStructure />
       <ResultsSection />
@@ -36,7 +47,42 @@ const IITPage = () => {
       <StudyMaterials />
       <AIMentor />
       <QuestionGenerator/>
-      <FAQSection />
+      <div className="py-16">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6
+                         bg-gradient-to-r from-green-600 to-blue-600 
+                         text-transparent bg-clip-text">
+            NEET Preparation
+          </h2>
+          <p className="text-xl text-gray-700">
+            Comprehensive coaching for medical entrance examination
+          </p>
+        </div>
+        <NEETOverview />
+        <NEETPattern />
+        <NEETSyllabus />
+        <NEETStudyPlan />
+      </div>
+
+      <div className="py-16">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6
+                         bg-gradient-to-r from-purple-600 to-pink-600 
+                         text-transparent bg-clip-text">
+            MHT-CET Preparation
+          </h2>
+          <p className="text-xl text-gray-700">
+            Comprehensive coaching for Maharashtra's premier entrance exam
+          </p>
+        </div>
+        <MHTCETOverview />
+        <MHTCETEligibility />
+        <MHTCETSyllabus />
+        <MHTCETPreparation />
+      </div>
+
+      {/* <FAQSection /> */}
+      <CombinedFAQSection/>
       <Footer />
     </div>
   );
