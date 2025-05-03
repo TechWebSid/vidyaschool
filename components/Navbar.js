@@ -18,11 +18,12 @@ const Navbar = () => {
     { name: 'Home', href: '/' },
     { name: 'PreSchool', href: '/preschool' },
     { name: 'CBSE School', href: '/school' },
-    { name: 'IIT-JEE', href: '/iit' },
+    { name: 'PrepZone', href: '/iit' },
     { name: 'About Us', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+
     {name: 'labs' , href: '/labs'},
-    {name: 'Mentorship', href: '/mentorship'}
+    {name: 'Mentorship', href: '/mentorship'},
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
